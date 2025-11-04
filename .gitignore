@@ -1,0 +1,62 @@
+# ==========================================
+# Altnera Email Verification SDK - .gitignore
+# ==========================================
+
+# ------------------------
+# Global OS / Editor files
+# ------------------------
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+.idea/
+.vscode/
+.env
+.env.*
+*.bak
+
+# ------------------------
+# Node / JavaScript SDK
+# ------------------------
+# Build output
+js-sdk/dist/
+# Dependencies
+js-sdk/node_modules/
+# Package manager lock files (optional for library packages)
+js-sdk/package-lock.json
+js-sdk/yarn.lock
+# Test coverage or temp data
+js-sdk/coverage/
+js-sdk/.tsbuildinfo
+
+# ------------------------
+# PHP SDK
+# ------------------------
+# Composer dependencies
+php-sdk/vendor/
+# Composer lock file (for libraries, not apps)
+php-sdk/composer.lock
+# PHPUnit or test artifacts
+php-sdk/.phpunit.result.cache
+php-sdk/.phpunit.cache/
+php-sdk/coverage/
+php-sdk/.phpunit.xml
+
+# ------------------------
+# System / misc
+# ------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.bak
+*.old
+*.orig
+*.rej
+
+# ------------------------
+# OS-specific caches
+# ------------------------
+ehthumbs.db
+Desktop.ini
