@@ -1,0 +1,175 @@
+# Altnera Email Verification API – Full Reference
+
+> **Version:** v1.0  
+> **Base URL:** `https://altnera.com/api`  
+> **Auth:** `Authorization: Bearer <API_KEY>`
+
+Official reference for the Altnera Email Verification API. Validate and score email addresses using DNS, MX, SMTP, and heuristics.
+
+---
+
+## 🔑 Authentication
+
+Send your API key on every request:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+If missing/invalid → `401 Unauthorized`.
+
+You can manage/rotate your key at `/api/manage-key.php`.
+
+---
+
+## 📍 Endpoints
+
+### 1) Verify Email
+
+**POST** `/verify.php`
+
+Validate a single email address.
+
+**Request**
+```http
+POST /api/verify.php
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+```
+
+```json
+{ "email": "name@company.com" }
+```
+
+**Response**
+```json
+{
+  "email": "name@company.com",
+  "status": "deliverable",
+  "score": 0.92,
+  "checks": {
+    "syntax": true,
+    "mxRecords": true,
+    "dnsResolved": true,
+    "smtp": false,
+    "disposable": false,
+    "roleAddress": false,
+    "freeProvider": false
+  },
+  "domain": "company.com"
+}
+```
+
+**Status values**: `deliverable` | `undeliverable` | `risky` | `unknown`
+
+---
+
+### 2) Bulk Verification
+
+**POST** `/verify-bulk.php` *(optional server endpoint; client SDK also supports bulk fanout)*
+
+**Request**
+```http
+POST /api/verify-bulk.php
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+```
+```json
+{ "emails": ["a@x.com", "b@y.com"] }
+```
+
+**Response**
+```json
+{ "results": [ /* VerifyResponse[] */ ] }
+```
+
+---
+
+### 3) API Key Info
+
+**GET** `/manage-key.php?action=info`
+
+**Response**
+```json
+{
+  "key_last_four": "9F3C",
+  "created_at": "2025-10-02T14:11:22Z",
+  "last_used_at": "2025-11-01T08:33:54Z",
+  "active": true,
+  "scopes": ["verify", "bulk"]
+}
+```
+
+---
+
+### 4) Rotate API Key
+
+**POST** `/manage-key.php?action=rotate`
+
+**Response**
+```json
+{ "api_key": "ALTNERA_NEW_KEY_123456", "rotated_at": "2025-11-04T10:12:30Z" }
+```
+
+---
+
+## ⚠️ Errors
+
+| Code | Meaning |
+|-----:|--------|
+| 400 | Missing/invalid parameter (e.g., no `email`) |
+| 401 | Unauthorized (missing/invalid key) |
+| 403 | Forbidden (key disabled/no scope) |
+| 405 | Method not allowed (use POST) |
+| 429 | Too many requests (rate limit) |
+| 500 | Internal server error |
+
+**Error shape**
+```json
+{ "error": "Message here" }
+```
+
+---
+
+## 🧠 Scoring
+
+| Range | Risk |
+|------:|------|
+| 0.90–1.00 | Low |
+| 0.60–0.89 | Medium |
+| < 0.60 | High |
+
+---
+
+## 🧪 Examples
+
+### cURL
+```bash
+curl -X POST https://altnera.com/api/verify.php   -H "Authorization: Bearer YOUR_API_KEY"   -H "Content-Type: application/json"   -d '{ "email": "name@company.com" }'
+```
+
+### JavaScript
+```js
+const res = await fetch("https://altnera.com/api/verify.php", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ email: "name@company.com" })
+});
+console.log(await res.json());
+```
+
+### PHP
+```php
+$ch = curl_init("https://altnera.com/api/verify.php");
+curl_setopt_array($ch, [
+  CURLOPT_POST => true,
+  CURLOPT_HTTPHEADER => ["Authorization: Bearer YOUR_API_KEY", "Content-Type: application/json"],
+  CURLOPT_POSTFIELDS => json_encode(["email" => "name@company.com"]),
+  CURLOPT_RETURNTRANSFER => true
+]);
+$resp = curl_exec($ch);
+echo $resp;
+```
