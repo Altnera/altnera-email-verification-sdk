@@ -1,0 +1,20 @@
+{
+  "name": "altnera/email-verification",
+  "description": "Official PHP SDK for the Altnera Email Verification API. Verify single or bulk emails, check MX/DNS records, and manage API keys.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Altnera\\": "src/Altnera/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Altnera",
+      "email": "support@altnera.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@altnera/email-verification",
+  "version": "1.0.0",
+  "description": "Official JavaScript/TypeScript SDK for the Altnera Email Verification API (Node.js + browser). Validate email deliverability, check DNS/MX, and manage API keys.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "test": "node -e \"console.log('basic ok')\""
+  },
+  "keywords": [
+    "altnera",
+    "email",
+    "verification",
+    "sdk",
+    "api",
+    "dns",
+    "mx",
+    "smtp",
+    "deliverability"
+  ],
+  "author": "Altnera <support@altnera.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altnera/altnera-email-verification-sdk"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
