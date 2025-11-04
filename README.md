@@ -1,19 +1,14 @@
 # Altnera Email Verification SDKs
 
-Official SDKs for the Altnera Email Verification API.
+Official SDKs for the [Altnera Email Verification API](https://altnera.com/api/docs).
 
-Includes:
-- **JavaScript / TypeScript SDK** (Node.js + Browser)
-- **PHP SDK**
+Easily verify single or bulk email addresses, check MX/DNS/Syntax validity, and manage API keys.
 
-🏠 Website: [https://altnera.com](https://altnera.com)  
-📘 Docs: [https://altnera.com/api/docs](https://altnera.com/api/docs)
+---
 
-## SDKs
+## 📘 Documentation
+Full API reference: [https://altnera.com/api/docs](https://altnera.com/api/docs)
 
-### JavaScript / TypeScript
-- Path: `/js-sdk`
-- Package name: `@altnera/email-verification`
-- Install:
-  ```bash
-  npm install @altnera/email-verification
+**Base URL:** `https://altnera.com`  
+**Verify endpoint:** `/api/verify.php`  
+**Auth header:**  
